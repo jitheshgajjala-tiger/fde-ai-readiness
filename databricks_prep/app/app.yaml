@@ -1,0 +1,18 @@
+# Assignment 1: only the warehouse resource is needed. Add the commented blocks one assignment at a time.
+# Resource keys (the names you give each resource in the Apps UI) must match the valueFrom values below.
+command: ['streamlit', 'run', 'app.py']
+env:
+  - name: DATABRICKS_WAREHOUSE_ID
+    valueFrom: sql-warehouse
+  - name: ORDERS_TABLE
+    value: 'REPLACE_CATALOG.fde_prep.fact_orders'
+  - name: USE_USER_AUTH
+    value: 'false'
+  - name: STREAMLIT_GATHER_USAGE_STATS
+    value: 'false'
+  # Assignment 2 (resource key: genie-space)
+  # - name: GENIE_SPACE_ID
+  #   valueFrom: genie-space
+  # Assignment 3 (resource key: serving-endpoint)
+  # - name: SERVING_ENDPOINT
+  #   valueFrom: serving-endpoint

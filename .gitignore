@@ -1,0 +1,25 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local credentials and environment overrides
+.env
+.env.*
+!.env.example
+.databrickscfg
+
+# Databricks provisioning logs and temporary local checks
+databricks_prep/prov*.txt
+databricks_prep/pre.txt
+databricks_prep/gen.txt
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
