@@ -74,7 +74,8 @@ def ask_genie(question: str, token: str | None) -> str:
         return f"Genie failed ({error_type}): {error_message}"
     texts = [a["text"]["content"] for a in message.get("attachments") or [] if a.get("text")]
     queries = [a["query"]["query"] for a in message.get("attachments") or [] if a.get("query")]
-    return "\n\n".join(texts + [f"SQL:\n{q}" for q in queries]) or f"Genie finished with status {message['status']}."
+    sql_blocks = [f"SQL:\n```sql\n{query}\n```" for query in queries]
+    return "\n\n".join(texts + sql_blocks) or f"Genie finished with status {message['status']}."
 
 
 def ask_model(prompt: str, token: str | None) -> str:
@@ -151,7 +152,7 @@ with genie_tab:
         if question and st.button("Ask Genie"):
             with st.spinner("Waiting for Genie"):
                 try:
-                    st.text(ask_genie(question, token))
+                    st.markdown(ask_genie(question, token))
                 except Exception as exc:
                     st.error(friendly_error(exc))
 
