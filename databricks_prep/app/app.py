@@ -115,6 +115,7 @@ with orders_tab:
 
     orders = st.session_state.orders_data
     if orders is not None:
+        selected_region = "All regions"
         if "region" in orders.columns:
             regions = ["All regions", *sorted(orders["region"].dropna().astype(str).unique())]
             selected_region = st.selectbox("Region", regions)
@@ -128,6 +129,13 @@ with orders_tab:
             monthly_counts = monthly_orders.groupby("month").size().rename("orders")
             st.subheader("Orders by month")
             st.bar_chart(monthly_counts)
+        export_region = selected_region.lower().replace(" ", "_")
+        st.download_button(
+            "Download filtered orders (CSV)",
+            data=orders.to_csv(index=False),
+            file_name=f"orders_{export_region}.csv",
+            mime="text/csv",
+        )
 
 with genie_tab:
     if not os.getenv("GENIE_SPACE_ID"):

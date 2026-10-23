@@ -14,7 +14,7 @@ Starting from a working app, make three incremental UI/feature changes (e.g., ad
 
 Iteration 1 is deployed and behaviorally verified. The screenshot supplied in chat shows **North** selected and every displayed row has `region = North` (7 matching rows). This confirms the region filter affects the displayed result.
 
-Iteration 2 is prepared locally in `databricks_prep/app/app.py`: a monthly order-volume bar chart uses the currently filtered rows, so the chart follows the selected region. Syntax validation and editor diagnostics pass. It is not complete until this version is redeployed and the chart is verified in Databricks.
+Iteration 2 is deployed and behaviorally verified. The screenshot supplied in chat shows **North** selected and the monthly order-volume chart: January 1, February 2, May 2, and September 2. The monthly counts sum to the 7 displayed North orders.
 
-Iteration 3 (CSV export) remains to be implemented after the chart deployment is checked. The North-filter screenshot is supplied in chat and is not stored in this repository.
+Iteration 3 is prepared locally in `databricks_prep/app/app.py`: **Download filtered orders (CSV)** exports the currently displayed rows, using a region-specific filename. This is not complete until the app is redeployed and the downloaded CSV is checked against the selected region's table. Screenshots are supplied in chat and are not stored in this repository.
 
