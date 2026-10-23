@@ -1,4 +1,4 @@
-# Assignment 1: only the warehouse resource is needed. Add the commented blocks one assignment at a time.
+# Add the resources required by the assignments you are deploying.
 # Resource keys (the names you give each resource in the Apps UI) must match the valueFrom values below.
 command: ['streamlit', 'run', 'app.py']
 env:
@@ -10,9 +10,9 @@ env:
     value: 'false'
   - name: STREAMLIT_GATHER_USAGE_STATS
     value: 'false'
-  # Assignment 2 (resource key: genie-space)
-  # - name: GENIE_SPACE_ID
-  #   valueFrom: genie-space
-  # Assignment 3 (resource key: serving-endpoint)
-  # - name: SERVING_ENDPOINT
-  #   valueFrom: serving-endpoint
+  # Add the matching Genie resource in the Databricks App before deploying.
+  - name: GENIE_SPACE_ID
+    valueFrom: genie-space
+  # Add a model-serving resource with this key before deploying.
+  - name: SERVING_ENDPOINT
+    valueFrom: model
