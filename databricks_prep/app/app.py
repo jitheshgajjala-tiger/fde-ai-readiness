@@ -121,6 +121,13 @@ with orders_tab:
             if selected_region != "All regions":
                 orders = orders[orders["region"].astype(str) == selected_region]
         st.dataframe(orders, use_container_width=True)
+        if "order_date" in orders.columns and not orders.empty:
+            monthly_orders = orders.assign(
+                month=pd.to_datetime(orders["order_date"]).dt.to_period("M").astype(str)
+            )
+            monthly_counts = monthly_orders.groupby("month").size().rename("orders")
+            st.subheader("Orders by month")
+            st.bar_chart(monthly_counts)
 
 with genie_tab:
     if not os.getenv("GENIE_SPACE_ID"):

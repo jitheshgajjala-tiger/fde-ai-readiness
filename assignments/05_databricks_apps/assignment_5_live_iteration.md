@@ -12,5 +12,9 @@ Starting from a working app, make three incremental UI/feature changes (e.g., ad
 
 ## Notes
 
-Prepared the first local iteration in `databricks_prep/app/app.py`: loaded orders are retained in Streamlit session state and can be filtered by region. Syntax validation passed. This is not yet a completed iteration because the app has not been deployed and checked in Databricks. Deploy this version, load the orders, test at least two region selections, and capture the result before proceeding to the chart change.
+Iteration 1 is deployed and behaviorally verified. The screenshot supplied in chat shows **North** selected and every displayed row has `region = North` (7 matching rows). This confirms the region filter affects the displayed result.
+
+Iteration 2 is prepared locally in `databricks_prep/app/app.py`: a monthly order-volume bar chart uses the currently filtered rows, so the chart follows the selected region. Syntax validation and editor diagnostics pass. It is not complete until this version is redeployed and the chart is verified in Databricks.
+
+Iteration 3 (CSV export) remains to be implemented after the chart deployment is checked. The North-filter screenshot is supplied in chat and is not stored in this repository.
 
