@@ -2,6 +2,8 @@ import argparse
 import logging
 
 from rag import (
+    DEFAULT_CHUNK_OVERLAP,
+    DEFAULT_CHUNK_SIZE,
     answer_from_hits,
     build_chunks,
     build_dense_index,
@@ -17,8 +19,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Ask questions over the local docs.")
     parser.add_argument("question")
     parser.add_argument("--docs", default="docs")
-    parser.add_argument("--chunk-size", type=int, default=80)
-    parser.add_argument("--overlap", type=int, default=15)
+    parser.add_argument("--chunk-size", type=int, default=DEFAULT_CHUNK_SIZE)
+    parser.add_argument("--overlap", type=int, default=DEFAULT_CHUNK_OVERLAP)
     parser.add_argument("--top-k", type=int, default=1)
     parser.add_argument("--doc-type", default=None, help="restrict to a docs sub-folder, e.g. sttm")
     parser.add_argument("--retriever", choices=["keyword", "dense", "hybrid"], default="hybrid")

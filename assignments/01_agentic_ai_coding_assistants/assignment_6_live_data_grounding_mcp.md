@@ -37,3 +37,9 @@ There is no Databricks workspace yet, so I used the MCP server that is available
 
 ## Notes
 
+The Databricks-specific repeat was attempted with: "Using the connected Databricks MCP server, show the columns and data types for `workspace.fde_prep.fact_orders`." The first response said no Databricks MCP tool was connected in that chat, so it could not query the live schema.
+
+After adding the legacy SQL MCP endpoint to the VS Code workspace configuration and enabling Managed MCP Servers, OAuth sign-in was attempted. Databricks returned `invalid_request`: the OAuth application with client ID `http://127.0.0.1:33418 https://vscode.dev/redirect` was not available in the Databricks account. The authorization URL included the SQL MCP endpoint and requested the `sql` scope. The error screenshot was supplied in chat and is retained as evidence of the current blocker.
+
+Per the user's request, stop setup here: leave the existing MCP configuration unchanged and do not proceed with OAuth app registration. No live table schema was returned, so the Databricks-specific deliverable remains open.
+

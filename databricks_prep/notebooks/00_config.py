@@ -14,7 +14,7 @@ ORDERS_TABLE = f"{CATALOG}.{SCHEMA}.fact_orders"
 CHUNKS_TABLE = f"{CATALOG}.{SCHEMA}.doc_chunks"
 
 # Fill these in after the matching step in the runbook.
-GENIE_SPACE_ID = ""          # from the Genie space URL
+GENIE_SPACE_ID = "01f1ce6ccd6f1af2a95d58d046af219e"  # Order Fulfilment Analytics
 SQL_WAREHOUSE_ID = "ce72158123970c93"  # Serverless Starter Warehouse
 
 # Names to confirm with 01_preflight (the endpoint names differ between workspaces).

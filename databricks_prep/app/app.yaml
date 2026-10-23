@@ -5,7 +5,7 @@ env:
   - name: DATABRICKS_WAREHOUSE_ID
     valueFrom: sql-warehouse
   - name: ORDERS_TABLE
-    value: 'REPLACE_CATALOG.fde_prep.fact_orders'
+    value: 'workspace.fde_prep.fact_orders'
   - name: USE_USER_AUTH
     value: 'false'
   - name: STREAMLIT_GATHER_USAGE_STATS

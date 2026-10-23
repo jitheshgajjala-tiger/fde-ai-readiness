@@ -5,6 +5,9 @@ import sys
 from pathlib import Path
 
 from rag import (
+    BASELINE_MIN_SCORE,
+    DEFAULT_CHUNK_OVERLAP,
+    DEFAULT_CHUNK_SIZE,
     NOT_FOUND_MESSAGE,
     answer_from_hits,
     build_chunks,
@@ -57,8 +60,11 @@ def _hit(hits, phrase, k):
 
 
 def run_a1(documents):
-    print("## A1: Baseline pipeline (chunk_size=80, overlap=15, dense embeddings BAAI/bge-small-en-v1.5)\n")
-    dense = build_dense_index(build_chunks(documents, 80, 15))
+    print(
+        f"## A1: Baseline pipeline (chunk_size={DEFAULT_CHUNK_SIZE}, overlap={DEFAULT_CHUNK_OVERLAP}, "
+        "dense embeddings BAAI/bge-small-en-v1.5)\n"
+    )
+    dense = build_dense_index(build_chunks(documents, DEFAULT_CHUNK_SIZE, DEFAULT_CHUNK_OVERLAP))
     for question, phrase in ANSWERABLE[:5]:
         hits = retrieve_dense(dense, question, 1)
         print(f"Q: {question}\nA: {answer_from_hits(question, hits)}\nCorrect chunk retrieved: {_hit(hits, phrase, 1)}\n")
@@ -97,21 +103,26 @@ def run_a3(documents):
 
 
 def run_a4(documents):
-    print("## A4: Groundedness failure hunt (chunk_size=80, overlap=15, dense, top-1, min_score=0.55)\n")
-    dense = build_dense_index(build_chunks(documents, 80, 15))
+    print(
+        f"## A4: Groundedness failure hunt (chunk_size={DEFAULT_CHUNK_SIZE}, "
+        f"overlap={DEFAULT_CHUNK_OVERLAP}, dense, top-1, min_score={BASELINE_MIN_SCORE})\n"
+    )
+    dense = build_dense_index(build_chunks(documents, DEFAULT_CHUNK_SIZE, DEFAULT_CHUNK_OVERLAP))
     print("Baseline on questions the docs do NOT answer:\n")
     for question in UNANSWERABLE:
         hits = retrieve_dense(dense, question, 1)
-        print(f"Q: {question}\nA: {answer_from_hits(question, hits, min_score=0.55)[:120]}\n")
+        print(f"Q: {question}\nA: {answer_from_hits(question, hits, min_score=BASELINE_MIN_SCORE)[:120]}\n")
     print("Sweep of the coverage gate (share of query terms that must appear in the cited chunk):\n")
     print("| min_coverage | answerable answered | unanswerable refused |")
     print("|---|---|---|")
     for gate in [0.0, 0.5, 0.6, 0.7, 0.8, 0.9]:
         answered = sum(
-            answer_from_hits(q, retrieve_dense(dense, q, 1), 0.55, gate) != NOT_FOUND_MESSAGE for q, _ in ANSWERABLE
+            answer_from_hits(q, retrieve_dense(dense, q, 1), BASELINE_MIN_SCORE, gate) != NOT_FOUND_MESSAGE
+            for q, _ in ANSWERABLE
         )
         refused = sum(
-            answer_from_hits(q, retrieve_dense(dense, q, 1), 0.55, gate) == NOT_FOUND_MESSAGE for q in UNANSWERABLE
+            answer_from_hits(q, retrieve_dense(dense, q, 1), BASELINE_MIN_SCORE, gate) == NOT_FOUND_MESSAGE
+            for q in UNANSWERABLE
         )
         print(f"| {gate} | {answered}/{len(ANSWERABLE)} | {refused}/{len(UNANSWERABLE)} |")
     question = UNANSWERABLE[0]

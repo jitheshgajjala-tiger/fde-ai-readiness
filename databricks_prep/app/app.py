@@ -102,11 +102,25 @@ st.caption("Running as the signed-in user" if token else "Running as the app ser
 orders_tab, genie_tab, model_tab = st.tabs(["Orders (SQL)", "Ask Genie", "Model endpoint"])
 
 with orders_tab:
+    if "orders_data" not in st.session_state:
+        st.session_state.orders_data = None
+
     if st.button("Load orders"):
         try:
-            st.dataframe(run_query(f"SELECT * FROM {_require_env('ORDERS_TABLE')} ORDER BY order_id LIMIT 100", token))
+            st.session_state.orders_data = run_query(
+                f"SELECT * FROM {_require_env('ORDERS_TABLE')} ORDER BY order_id LIMIT 100", token
+            )
         except Exception as exc:
             st.error(friendly_error(exc))
+
+    orders = st.session_state.orders_data
+    if orders is not None:
+        if "region" in orders.columns:
+            regions = ["All regions", *sorted(orders["region"].dropna().astype(str).unique())]
+            selected_region = st.selectbox("Region", regions)
+            if selected_region != "All regions":
+                orders = orders[orders["region"].astype(str) == selected_region]
+        st.dataframe(orders, use_container_width=True)
 
 with genie_tab:
     if not os.getenv("GENIE_SPACE_ID"):

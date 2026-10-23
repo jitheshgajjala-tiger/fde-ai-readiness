@@ -9,7 +9,7 @@ Take a task that requires exploring an unfamiliar part of the codebase before ma
 - [x] Approach and steps taken
 - [x] Evidence (screenshots, output, or links)
 - [x] Result and what I learned
-- [ ] Apply an actual update to the listed files (deliberately not done, see below)
+- [x] Apply an actual update to the listed files and verify the code references
 
 ## Approach
 
@@ -19,7 +19,7 @@ Take a task that requires exploring an unfamiliar part of the codebase before ma
 
 ## Evidence
 
-Compact result returned by the sub-agent: 8 files.
+Initial compact result returned by the sub-agent: 8 files.
 
 | Value | Where |
 |---|---|
@@ -35,7 +35,8 @@ I re-checked the code hits with a search in the main session; the line numbers m
 - The main conversation received about 25 lines instead of every file the sub-agent read, so the context stayed small.
 - The list showed something I would have missed: the values are hardcoded in **two places in code plus prose in 4 other files**. Changing the value in code alone would leave `results.txt` and both assignment write-ups stating the old configuration. That is a concrete argument for a single constant.
 - A sub-agent is stateless, so the prompt must say exactly what format to return. Without the format rule I would have received file dumps.
-- **I did not apply the update.** Changing 80/15 would invalidate the recorded experiment results. If you want to complete the "update it" half, pick a harmless value, change the listed code lines, and let the sub-agent re-run the same search to confirm nothing is left.
+- **Update applied without changing experiment settings:** centralized the baseline chunk size, overlap and score threshold as constants in `rag_app/rag.py`; the experiment and CLI code now reference those constants. The historical experiment outputs and their stated configurations were left unchanged.
+- Re-ran the bounded search after the edit. `rag.py` now owns the definitions; `experiments.py` and `main.py` import and reference them. No duplicate executable baseline settings remain. `results.txt` and the assignment write-ups retain literal values as historical experiment evidence.
 
 ## Notes
 

@@ -9,7 +9,7 @@ Pick a task you do manually every week (e.g., generating a code review checklist
 - [x] Approach and steps taken
 - [x] Evidence (screenshots, output, or links)
 - [x] Result and what I learned
-- [ ] Run `/review-pipeline-step` yourself in Copilot Chat on two targets and add a screenshot (not done yet)
+- [x] Run `/review-pipeline-step` yourself in Copilot Chat on two targets and capture screenshots
 
 ## Approach
 
@@ -17,12 +17,12 @@ Pick a task you do manually every week (e.g., generating a code review checklist
 
 **Slash command:** `.github/prompts/review-pipeline-step.prompt.md`. It takes two inputs, `file` and `function`, reads `.github/copilot-instructions.md`, marks PASS/FAIL per convention with line numbers, lists untested behaviours, and proposes at most 3 fixes. It is read-only.
 
-**Two runs on different inputs.** I executed the prompt body twice through two independent read-only sub-agents (not through the `/` command itself):
+**Two runs on different inputs.** The prompt was run directly in Copilot Chat for both targets. Earlier delegated prompt-body reviews are retained below as initial evidence, but the screenshots now verify the direct slash-command runs:
 
 | Run | Input | Result |
 |---|---|---|
-| 1 | `rag_app/rag.py` `clean_documents` | Naming PASS. Error handling PASS. Logging partial: logs row count at the end only, no start-of-step log. Untested: empty-file error and no-valid-files error. |
-| 2 | Customer 360 `starter_pipeline.py` `clean_orders` | Naming PASS. Logging FAIL: no `logger`, no row counts, and `print()` in `main()` (line 198). `errors="coerce"` silently turns bad values into 0 or NaT. Untested: invalid amounts and dates. |
+| 1 | `rag_app/rag.py` `clean_documents` | Naming PASS. Error handling PASS. Logging FAIL: logs loaded count at the end, but not at the start. Untested: empty-file and no-supported-files errors; nested-folder `doc_type`. |
+| 2 | Customer 360 `starter_pipeline.py` `clean_orders` | Naming PASS. Error handling FAIL for malformed values because `errors="coerce"` silently converts them; required columns are validated by `load_sources` before the normal call. Logging FAIL: no module logger or row-count logs in this function. Untested: malformed values, direct-call missing columns, and invalid input types. |
 
 ## Result and what I learned
 
@@ -32,7 +32,16 @@ Pick a task you do manually every week (e.g., generating a code review checklist
 
 ## Evidence note
 
-The two reports above are summarised from the sub-agent outputs. For proper evidence, type `/review-pipeline-step` in Copilot Chat, fill in the two inputs, and screenshot each run.
+Screenshots supplied in Copilot Chat show `/review-pipeline-step` completed for `rag_app/rag.py` / `clean_documents` and for Customer 360 `starter_pipeline.py` / `clean_orders`. The returned reviews are recorded under Notes. The screenshots were supplied in chat and are not stored as image files in this repository.
 
 ## Notes
+
+The prompt was run directly in Copilot Chat on both targets; screenshots of both runs were supplied in chat.
+
+- `rag_app/rag.py` / `clean_documents`: Naming PASS; error handling PASS; logging PARTIAL because the function reports the loaded document count at the end but does not log at entry. Tests cover a missing directory, but not an empty document or a directory with no supported files.
+- Customer 360 `starter_pipeline.py` / `clean_orders`: Naming PASS; logging FAIL because the module has no logger or row-count logs; numeric/date parsing uses `errors="coerce"`, so malformed values are not reported. Tests cover valid discounted revenue, not malformed values.
+
+**Validation correction:** one delegated review incorrectly reported that required-column validation was missing. `load_sources` checks the required `orders` columns before calling `clean_orders`; the remaining concern is malformed values, which column-presence checks do not validate.
+
+Both required direct command runs and screenshot evidence are now complete.
 

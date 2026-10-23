@@ -9,34 +9,40 @@ Write a custom instructions file (`*.instructions.md` or `CLAUDE.md`) that encod
 - [x] Approach and steps taken
 - [x] Evidence (screenshots, output, or links)
 - [x] Result and what I learned
-- [ ] Repeat the two requests in a fresh Copilot Chat as a clean test (see caveat)
+- [x] Repeat two unrelated code-generation requests in a fresh Copilot Chat and verify the conventions
 
 ## Approach
 
-**Instructions file:** `.github/copilot-instructions.md` (loaded automatically for every request) encodes three conventions:
+**Instructions file:** `.github/copilot-instructions.md` encodes three conventions:
 1. **Naming:** `snake_case`; `clean_<source>` and `build_<output>`; private helpers prefixed `_`.
 2. **Error handling:** validate at the boundary; `ValueError` or `FileNotFoundError` naming the source; no bare `except`.
-3. **Logging:** `logger = logging.getLogger(__name__)`; no `print()` in library code; row counts at the start and end of each step.
+3. **Logging:** `logger = logging.getLogger(__name__)`; no `print()` in library code; row counts at the start and end of each pipeline step.
 
-**Two unrelated requests, with no reminder of the rules:**
-1. "Write a function that cleans a CSV of support tickets" gave `topic1_demo/clean_tickets.py`.
-2. "Write a function that totals revenue per day from order dicts" gave `topic1_demo/build_daily_revenue.py`.
+In a fresh Copilot Chat, two new functions were created in new files rather than reusing the earlier examples:
+1. A feedback CSV cleaner, `clean_feedback_csv` in `topic1_demo/clean_feedback.py`.
+2. A monthly revenue aggregation, `build_monthly_revenue` in `topic1_demo/build_monthly_revenue.py`.
 
 ## Evidence
 
-| Convention | `clean_tickets.py` | `build_daily_revenue.py` |
+Fresh-chat screenshots supplied in chat show both new files being created. The first response reports checks for CSV/header validation, trimming values, dropping fully blank rows, and input/output row logging. The second reports monthly grouping, required-key and malformed-value validation, and input/output count logging.
+
+| Convention | `clean_feedback.py` | `build_monthly_revenue.py` |
 |---|---|---|
-| Naming | `clean_tickets`, helper `_normalize_priority` | `build_daily_revenue` |
-| Error handling | `FileNotFoundError("tickets file not found: ...")` and `ValueError("tickets is missing required columns: ...")` | `ValueError("orders row N is missing required keys: ...")` |
-| Logging | `logger = logging.getLogger(__name__)`, row count in and out | same pattern, rows in and days out |
-| No `print()`, no bare `except` | confirmed by a text search of both files | confirmed |
+| Naming | `clean_feedback_csv`; snake_case variables | `build_monthly_revenue`; snake_case variables |
+| Error handling | Checks file existence and CSV header; errors identify `feedback` | Checks required keys and malformed values; errors identify `orders` |
+| Logging | Module logger; rows in and rows out | Module logger; rows in and months out |
+| No `print()` or bare `except` | Confirmed by code inspection | Confirmed; conversion catches only `TypeError` and `ValueError` |
+
+Both files have no Pylance editor diagnostics, and Pylance syntax checks reported no syntax errors. Copilot's screenshots additionally report focused behavior checks passing.
 
 ## Result and what I learned
 
-- Both files follow all three conventions even though the requests were unrelated and never mentioned them.
-- The error messages name the source ("tickets", "orders"), as the rule requires.
-- **Caveat:** I wrote these files in the same session where the instructions file was already attached to my context, and I checked compliance with a text search, not by running the code. For a clean test, open a new Copilot Chat, make the two requests yourself, and run the same search.
-- Not covered by the file: the instructions say nothing about tests or type hints, so those vary from request to request.
+- The fresh chat created two distinct functions in new files, and inspection confirms the three project conventions are represented in both.
+- Validation errors name their source, logging records input and output counts, and neither file uses `print()` or a bare `except`.
+- Earlier requests that matched existing implementations were not sufficient evidence of code generation; using new functions and files made the clean test more discriminating.
+- The instructions do not specify tests or type hints, so those remain task-dependent.
 
 ## Notes
+
+The two fresh-chat screenshots were supplied in chat and are not stored as image files in the repository. Code inspection and editor/syntax diagnostics were independently checked in the workspace; the focused behavior-test claim is from the Copilot response shown in the screenshots.
 

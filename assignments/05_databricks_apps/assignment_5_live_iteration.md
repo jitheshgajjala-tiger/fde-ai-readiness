@@ -12,3 +12,5 @@ Starting from a working app, make three incremental UI/feature changes (e.g., ad
 
 ## Notes
 
+Prepared the first local iteration in `databricks_prep/app/app.py`: loaded orders are retained in Streamlit session state and can be filtered by region. Syntax validation passed. This is not yet a completed iteration because the app has not been deployed and checked in Databricks. Deploy this version, load the orders, test at least two region selections, and capture the result before proceeding to the chart change.
+

@@ -9,7 +9,7 @@ Deliberately ask a question the source documents do *not* answer, and confirm th
 - [x] Approach and steps taken
 - [x] Evidence (screenshots, output, or links)
 - [x] Result and what I learned
-- [ ] Run the generated grounded prompt through an LLM and paste the reply under Notes (not done yet)
+- [x] Run the generated grounded prompt through Copilot Chat and record unanswerable and answerable replies under Notes
 
 ## Approach
 
@@ -50,5 +50,17 @@ Coverage gate sweep (8 answerable, 4 unanswerable):
 
 ## Notes
 
-To finish: run `python experiments.py a4`, copy the printed prompt (the crypto question) into Copilot Chat or another LLM, and paste the reply here. Also try one answerable question to confirm it still answers.
+Prompt test via Copilot Chat:
+
+**Unanswerable question:** “What is the refund policy for cryptocurrency payments?”
+
+**Reply:** “I could not find this in the provided documents.”
+
+This matches the required refusal exactly. The retrieved context contained the general returns policy and shipping policy, but neither mentions cryptocurrency.
+
+**Answerable question:** “Within how many days can unused products be returned?”
+
+**Reply:** “Unused products may be returned within 30 days of delivery for a full refund. [returns_policy.md#0]”
+
+This answer is supported by the cited chunk. Both prompts were generated from the current local RAG index and tested in this Copilot Chat session; no external model or separate fresh chat was used.
 

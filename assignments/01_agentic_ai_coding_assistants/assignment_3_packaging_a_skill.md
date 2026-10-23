@@ -9,7 +9,7 @@ Take a process you've explained to a teammate more than once (e.g., how to valid
 - [x] Approach and steps taken
 - [x] Evidence (screenshots, output, or links)
 - [x] Result and what I learned
-- [ ] Test auto-pickup: in a fresh Copilot Chat, ask in plain words (without naming the skill) and record whether it loaded (not done yet)
+- [x] Test auto-pickup: in a fresh Copilot Chat, ask in plain words (without naming the skill) and record the observed result
 
 ## Approach
 
@@ -43,7 +43,9 @@ exit code 1
 - The script proves the checks can both pass and fail, since the non-STTM file fails.
 - The checks are regex patterns for this repo's prose style. A table-style STTM would need different patterns, so the skill is only as general as its checks.
 - The `description` line is what decides whether the assistant picks the skill, so it lists the phrases a user would actually type.
-- **Not yet proven:** automatic pickup. I could not test it, because a skill added during a session is not visible to that session. Reload the window, start a fresh chat, type something like "is the orders mapping doc complete before I hand it over?", and check whether the skill is read. Record the result here.
+- **Fresh-chat auto-pickup test:** started a fresh Copilot Chat and asked, "Is the orders mapping document complete before I hand it over? Check it for missing mapping details." The response applied the repository's six STTM checks and identified additional field-level handoff details, consistent with the skill's workflow.
 
 ## Notes
+
+Screenshot evidence for the fresh-chat test was supplied in chat. It shows the plain-language request and an STTM completeness response using the repository checks. This is evidence of observed auto-pickup behavior; the screenshot does not show an explicit skill-load event, so that mechanism is inferred from the response rather than directly displayed. The orders mapping was judged **not yet complete for handoff**: the response requested a target schema, full column mappings, calculation details, key-generation rules, load behavior, and broader reject criteria.
 
