@@ -13,6 +13,6 @@ env:
   # Add the matching Genie resource in the Databricks App before deploying.
   - name: GENIE_SPACE_ID
     valueFrom: genie-space
-  # TEMPORARY: invalid service name for Assignment 3 failure-path test. Restore valueFrom: model afterward.
+  # Unity Gateway model service resource key.
   - name: SERVING_ENDPOINT
-    value: 'system.ai.assignment_test_missing_model'
+    valueFrom: model
