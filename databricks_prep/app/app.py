@@ -9,7 +9,6 @@ import streamlit as st
 from databricks import sql
 from databricks.sdk import WorkspaceClient
 from databricks.sdk.core import Config
-from databricks.sdk.service.serving import ChatMessage, ChatMessageRole
 
 logger = logging.getLogger(__name__)
 
@@ -79,12 +78,16 @@ def ask_genie(question: str, token: str | None) -> str:
 
 
 def ask_model(prompt: str, token: str | None) -> str:
-    response = _workspace_client(token).serving_endpoints.query(
-        name=_require_env("SERVING_ENDPOINT"),
-        messages=[ChatMessage(role=ChatMessageRole.USER, content=prompt)],
-        max_tokens=300,
+    response = _workspace_client(token).api_client.do(
+        "POST",
+        "/ai-gateway/mlflow/v1/chat/completions",
+        body={
+            "model": _require_env("SERVING_ENDPOINT"),
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 300,
+        },
     )
-    return response.choices[0].message.content
+    return response["choices"][0]["message"]["content"]
 
 
 def friendly_error(exc: Exception) -> str:
