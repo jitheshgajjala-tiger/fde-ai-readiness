@@ -66,6 +66,12 @@ def ask_genie(question: str, token: str | None) -> str:
         time.sleep(3)
     else:
         raise TimeoutError("Genie did not answer within 3 minutes")
+    if message["status"] == "FAILED":
+        error = message.get("error") or {}
+        error_type = error.get("type", "UNKNOWN") if isinstance(error, dict) else "UNKNOWN"
+        error_message = error.get("error", "No error details returned") if isinstance(error, dict) else str(error)
+        logger.error("Genie request failed (%s): %s", error_type, error_message)
+        return f"Genie failed ({error_type}): {error_message}"
     texts = [a["text"]["content"] for a in message.get("attachments") or [] if a.get("text")]
     queries = [a["query"]["query"] for a in message.get("attachments") or [] if a.get("query")]
     return "\n\n".join(texts + [f"SQL:\n{q}" for q in queries]) or f"Genie finished with status {message['status']}."
