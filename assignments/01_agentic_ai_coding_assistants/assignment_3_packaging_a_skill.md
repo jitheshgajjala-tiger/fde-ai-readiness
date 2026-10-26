@@ -47,5 +47,5 @@ exit code 1
 
 ## Notes
 
-Screenshot evidence for the fresh-chat test was supplied in chat. It shows the plain-language request and an STTM completeness response using the repository checks. This is evidence of observed auto-pickup behavior; the screenshot does not show an explicit skill-load event, so that mechanism is inferred from the response rather than directly displayed. The orders mapping was judged **not yet complete for handoff**: the response requested a target schema, full column mappings, calculation details, key-generation rules, load behavior, and broader reject criteria.
+The screenshot shows the plain-language request and an STTM completeness response using the repository checks. This is evidence of observed auto-pickup behavior; the screenshot does not show an explicit skill-load event, so that mechanism is inferred from the response rather than directly displayed. The orders mapping was judged **not yet complete for handoff**: the response requested a target schema, full column mappings, calculation details, key-generation rules, load behavior, and broader reject criteria.
 

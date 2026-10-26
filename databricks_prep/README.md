@@ -18,7 +18,7 @@ Product names changed in the docs: Genie Spaces are now **Genie Agents**, Vector
 | 3 | **Section 2 (Genie):** follow `genie_space_setup.md`; then `03_genie_governance` and `04_genie_api`. | A second user for A3 |
 | 4 | **Section 4 (AI Search):** run `05_seed_doc_chunks`, then `06_ai_search` cell by cell. | Serverless, AI Search endpoint |
 | 5 | **Section 5 (Apps):** deploy `app/`, then add one feature at a time. | Apps enabled |
-| 6 | **Section 6 (Agents):** run `07_uc_functions`, then `08_agent`. | Chat model endpoint |
+| 6 | **Section 6 (Agents):** run `07_uc_functions`, then `08_agent`; run `09_deploy_agent` only when ready to register the model and create/update its billable endpoint. | Chat model endpoint; serving permissions for A5 |
 
 Do Section 2 before 5 and 6 (they reuse the Genie space), and Section 4 before 6 (the docs tool uses the index).
 
@@ -46,11 +46,19 @@ Write what **failed** too; the Topic 3 write-ups show the expected level of hone
 CLI syntax for sync and deploy was not verified; check `databricks apps --help` before relying on it.
 
 ## Section 6: Agents
-* A1: `ENABLED_TOOLS` has the two UC functions. Expect the lookup questions to pass and the aggregate and document questions to fail.
-* A2: add `"ask_genie"` and `"search_docs"` to `ENABLED_TOOLS`, rerun the eval. The `needs` column shows which questions each tool unlocks.
-* A3: the eval is the 14 questions in `agent_eval/eval_set.jsonl`. The loop scores with a simple whole-token match; if you want LLM judges, run the same questions through MLflow evaluation as an extra step and document at least one failure.
-* A4: set `BREAK_TOOL = True` in `07_uc_functions`, rerun, then find the bad span in the MLflow trace without opening the agent code. Restore afterwards.
-* A5 (deployment): **not prepared**. Databricks now documents an Agent Bricks CLI path and a legacy Model Serving path; read the current "Deploy agents on Databricks" page on the day and choose the one your workspace supports.
+### One-session run order
+
+Do this as one Databricks workspace session after Sections 2 and 4 are ready. Keep the notebook folder imported together so the `%run` references work. Capture notebook output/screenshots as you go; do not mark an assignment complete from expected values alone. Save the five assignment write-ups and evidence together, then make one repo commit after the live run.
+
+| Order | Assignment | Workspace action | Evidence to capture |
+|---|---|---|---|
+| 1 | A1: first tool-calling agent | Run `07_uc_functions` and confirm its direct function check; run `08_agent` with only `get_order_status` and `get_late_days`. Try order 1007, order 1011, and a general arithmetic question. | Function result row and both agent answers, showing tool use for order facts and direct response for arithmetic. |
+| 2 | A2: multi-tool composition | In `08_agent`, add `ask_genie` and `search_docs` to `ENABLED_TOOLS` and rerun. Test one order lookup, one revenue question, one return-policy question, and one question requiring structured order data plus policy context. | Tool-enabled list, answers, and traces/tool outputs showing which tool served each question. |
+| 3 | A3: evaluation | Run the full 14-row `EVAL_ROWS` evaluation with the expanded tool set. The whole-token scorer is a smoke test, not an LLM judge. Record the actual pass count and at least one failed row with its answer. | Evaluation table and summary grouped by `needs`; include one failure and likely cause. |
+| 4 | A4: tracing/root cause | After the baseline agent works, run the `BREAK_TOOL = True` cell in `07_uc_functions`, ask the agent for order 1007 again, inspect the MLflow trace for the incorrect `get_order_status` result, then rerun the function-creation cell to restore it. | Trace showing the bad tool span and output, final wrong answer, then a restoration check. Do not leave the function broken. |
+| 5 | A5: deployment/monitoring | Run `09_deploy_agent` after Sections 2 and 4, only when ready for its model registration and scale-to-zero serving endpoint creation/update. Review its UC resource declarations and permissions, then inspect printed request results, endpoint logs/metrics, and MLflow traces. | Deployment/endpoint identity, sample request outcomes, and monitoring evidence, or the exact feature/permission blocker. |
+
+Run `01_preflight` first if the model endpoint or AI Search availability is uncertain. The workspace's configured chat endpoint is `databricks-claude-sonnet-4-5`, but confirm it exists in this workspace. `09_deploy_agent` prepares an MLflow `ResponsesAgent` model and guarded Model Serving workflow; it has not been run against the workspace. Do not commit secrets, tokens, or unredacted logs.
 
 ## If something is unavailable (for example on a free workspace)
 Run `01_preflight` first; it reports which features are missing. Likely fallbacks: no AI Search endpoint means do Section 4 in the UI only if

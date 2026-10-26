@@ -62,5 +62,5 @@ This matches the required refusal exactly. The retrieved context contained the g
 
 **Reply:** “Unused products may be returned within 30 days of delivery for a full refund. [returns_policy.md#0]”
 
-This answer is supported by the cited chunk. Both prompts were generated from the current local RAG index and tested in this Copilot Chat session; no external model or separate fresh chat was used.
+This answer is supported by the cited chunk. Both prompts were generated from the current local RAG index and tested with Copilot; no external model or separate fresh-session test was used.
 

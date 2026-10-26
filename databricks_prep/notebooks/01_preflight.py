@@ -55,7 +55,7 @@ dbutils.library.restartPython()
 from databricks.ai_search.client import AISearchClient
 
 try:
-    print("AI Search endpoints:", AISearchClient().list_endpoints())
+    print("AI Search endpoints:", AISearchClient(disable_notice=True).list_endpoints())
 except Exception as exc:
     print(f"AI Search: UNAVAILABLE ({type(exc).__name__}: {exc})")
 

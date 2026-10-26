@@ -34,6 +34,8 @@ Question: `What is the total revenue by region, excluding cancelled orders?`
 
 Observed result: East 1,515; North 1,250; South 1,725; West 1,360. South is highest among the four regions.
 
+The redeployed app renders the answer with formatted bold emphasis and the generated SQL in a syntax-highlighted SQL block. The response also offered a relevant follow-up about calculating revenue after discounts or returns.
+
 Generated SQL:
 
 ```sql
@@ -53,5 +55,5 @@ ORDER BY f.region
 
 - The deployed app successfully submitted questions to Genie and displayed both natural-language answers and generated SQL.
 - The cancelled-order count (2) and regional revenue totals match the seeded workspace results.
-- The initial display exposed Markdown markers literally. The app now renders Genie responses as Markdown and formats generated SQL in a fenced SQL block; redeploy this presentation fix to confirm the polished display.
+- The initial display exposed Markdown markers literally. After the app was redeployed with Markdown rendering, the answer emphasis and SQL block displayed in the intended formatted style.
 

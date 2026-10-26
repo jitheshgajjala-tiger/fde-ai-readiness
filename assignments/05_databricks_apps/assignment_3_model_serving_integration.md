@@ -26,7 +26,7 @@ The deployed app returned a relevant answer and did not claim to access its orde
 
 Temporarily configured `SERVING_ENDPOINT` with the invalid model-service name `system.ai.assignment_test_missing_model`, redeployed, and clicked **Send** with the same prompt. The app displayed: `The request failed: NotFound. Check the app logs for details.` The app log identified Databricks `NotFound` for the specified model service. This confirms the UI handles a missing service gracefully and directs the user to logs.
 
-The valid Unity Gateway Claude Sonnet 4.5 resource mapping has been restored in `app.yaml` as `valueFrom: model`. Redeploy the restored configuration so the app is left operational after the failure test.
+The valid Unity Gateway Claude Sonnet 4.5 resource mapping has been restored in `app.yaml` as `valueFrom: model` and pushed to the repository. Redeploy this restored configuration to leave the live app operational after the failure test; that final redeployment has not yet been confirmed.
 
 ## Result and what I learned
 

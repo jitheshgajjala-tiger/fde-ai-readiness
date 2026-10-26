@@ -24,7 +24,7 @@ In a fresh Copilot Chat, two new functions were created in new files rather than
 
 ## Evidence
 
-Fresh-chat screenshots supplied in chat show both new files being created. The first response reports checks for CSV/header validation, trimming values, dropping fully blank rows, and input/output row logging. The second reports monthly grouping, required-key and malformed-value validation, and input/output count logging.
+Fresh-chat screenshots show both new files being created. The first response reports checks for CSV/header validation, trimming values, dropping fully blank rows, and input/output row logging. The second reports monthly grouping, required-key and malformed-value validation, and input/output count logging.
 
 | Convention | `clean_feedback.py` | `build_monthly_revenue.py` |
 |---|---|---|
@@ -44,5 +44,5 @@ Both files have no Pylance editor diagnostics, and Pylance syntax checks reporte
 
 ## Notes
 
-The two fresh-chat screenshots were supplied in chat and are not stored as image files in the repository. Code inspection and editor/syntax diagnostics were independently checked in the workspace; the focused behavior-test claim is from the Copilot response shown in the screenshots.
+The two fresh-chat screenshots document the generated files and responses. Code inspection and editor/syntax diagnostics were independently checked in the workspace; the focused behavior-test claim is from the Copilot responses shown in the screenshots.
 

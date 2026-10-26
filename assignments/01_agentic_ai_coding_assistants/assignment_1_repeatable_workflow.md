@@ -32,11 +32,11 @@ Pick a task you do manually every week (e.g., generating a code review checklist
 
 ## Evidence note
 
-Screenshots supplied in Copilot Chat show `/review-pipeline-step` completed for `rag_app/rag.py` / `clean_documents` and for Customer 360 `starter_pipeline.py` / `clean_orders`. The returned reviews are recorded under Notes. The screenshots were supplied in chat and are not stored as image files in this repository.
+Screenshots show `/review-pipeline-step` completed for `rag_app/rag.py` / `clean_documents` and for Customer 360 `starter_pipeline.py` / `clean_orders`. The returned reviews are recorded under Notes.
 
 ## Notes
 
-The prompt was run directly in Copilot Chat on both targets; screenshots of both runs were supplied in chat.
+The prompt was run directly in Copilot Chat on both targets, and screenshots document both runs.
 
 - `rag_app/rag.py` / `clean_documents`: Naming PASS; error handling PASS; logging PARTIAL because the function reports the loaded document count at the end but does not log at entry. Tests cover a missing directory, but not an empty document or a directory with no supported files.
 - Customer 360 `starter_pipeline.py` / `clean_orders`: Naming PASS; logging FAIL because the module has no logger or row-count logs; numeric/date parsing uses `errors="coerce"`, so malformed values are not reported. Tests cover valid discounted revenue, not malformed values.

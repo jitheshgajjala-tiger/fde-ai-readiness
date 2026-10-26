@@ -23,7 +23,7 @@ import time
 from databricks.ai_search.client import AISearchClient
 from databricks.sdk import WorkspaceClient
 
-client = AISearchClient()
+client = AISearchClient(disable_notice=True)
 w = WorkspaceClient()
 
 

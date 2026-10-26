@@ -1,9 +1,9 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Tool-calling agent, tracing and evaluation (Section 6, Assignments 1 to 4)
-# MAGIC A plain tool-calling loop over an OpenAI-compatible Databricks model endpoint, with MLflow tracing.
-# MAGIC Run `07_uc_functions` first. Change `ENABLED_TOOLS` to move from Assignment 1 (UC functions only) to
-# MAGIC Assignment 2 (add Genie and document search).
+# MAGIC A plain tool-calling loop over a Databricks model service, with MLflow tracing.
+# MAGIC Run cells from the top in order. Run `07_uc_functions` first. Do not replace the Agent loop cell with a stub.
+# MAGIC Assignment 1 uses UC functions; Assignment 2 enables Genie and document search.
 # MAGIC
 # MAGIC Deployment (Assignment 5) is **not** in this notebook: Databricks' recommended path changes between releases, so
 # MAGIC follow the current quickstart linked in the runbook.
@@ -38,13 +38,16 @@ mlflow.openai.autolog()
 w = WorkspaceClient()
 llm = DatabricksOpenAI()
 
-ENABLED_TOOLS = ["get_order_status", "get_late_days"]  # Assignment 2: add "ask_genie" and "search_docs"
+A1_TOOLS = ["get_order_status", "get_late_days"]
+A2_TOOLS = [*A1_TOOLS, "ask_genie", "search_docs"]
+ENABLED_TOOLS = A1_TOOLS.copy()
 MAX_STEPS = 6
 
 SYSTEM_PROMPT = (
     "You answer questions about customer orders and company policy. Use a tool whenever the answer depends on data or "
     "documents; answer directly only for general questions such as arithmetic. If a tool returns NOT_FOUND, say the order "
-    "was not found. Never invent order data."
+    "was not found. For a question that asks for both order analytics and policy/document facts, call ask_genie and "
+    "search_docs respectively, then combine their results. Never invent order data."
 )
 
 # COMMAND ----------
@@ -102,7 +105,9 @@ _ai_search_index = None
 def search_docs(query: str) -> str:
     global _ai_search_index
     if _ai_search_index is None:
-        _ai_search_index = AISearchClient().get_index(endpoint_name=AI_SEARCH_ENDPOINT, index_name=INDEX_NAME)
+        _ai_search_index = AISearchClient(disable_notice=True).get_index(
+            endpoint_name=AI_SEARCH_ENDPOINT, index_name=INDEX_NAME
+        )
     rows = _ai_search_index.similarity_search(
         query_text=query, columns=["chunk_id", "text"], num_results=3, query_type="hybrid"
     )["result"]["data_array"]
@@ -159,6 +164,7 @@ def run_agent(question: str) -> str:
 
 # MAGIC %md
 # MAGIC ## Assignment 1: calls the tool when needed, answers directly when not
+# MAGIC This cell selects the two UC tools. Run it to verify Assignment 1 behavior.
 
 # COMMAND ----------
 
@@ -168,8 +174,24 @@ for question in ["What is the status of order 1007?", "What is 15% of 200?"]:
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ## Assignment 2: combined Genie and document-search question
+# MAGIC This cell enables all four tools, asks one question requiring both structured order data and policy context,
+# MAGIC and creates an MLflow trace. Confirm the trace contains both `ask_genie` and `search_docs` tool spans.
+
+# COMMAND ----------
+
+ENABLED_TOOLS = A2_TOOLS.copy()
+combined_question = (
+    "How many orders were cancelled, and how many days do customers have to return unused products?"
+)
+combined_answer = run_agent(combined_question)
+print(combined_answer)
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ## Assignment 3: evaluation (14 questions, expected answers computed from the seed data)
-# MAGIC Questions tagged `genie` or `docs` are expected to **fail** until those tools are enabled. That gap is the finding.
+# MAGIC This evaluation uses the tool set selected above. Record the observed failures and inspect their traces.
 
 # COMMAND ----------
 

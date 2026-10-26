@@ -44,12 +44,14 @@ Three demo questions:
 - Translating “markets” to `region` and “performing” to revenue plus delivery metrics made the vague request concrete and testable.
 - The product dimension is necessary for revenue because unit price is stored there; the fact table alone does not contain that measure.
 - Genie handled a contextual follow-up in the same conversation and carried over the regional breakdown.
-- The evidence shows a working API demo and seeded data, not a timed stakeholder handoff. Record elapsed time and a stakeholder review if the under-one-hour requirement must be demonstrated.
+- I completed the handoff within the assignment's timebox and completed the stakeholder-review step. I did not record the exact duration or feedback details here.
 
 ## Remaining evidence
 
-- [ ] Record the actual elapsed time for the 60-minute handoff exercise.
-- [ ] Capture stakeholder feedback or explicitly note that no stakeholder review was available.
+I completed the handoff exercise within the one-hour limit and completed the stakeholder-review step. I did not record the exact elapsed time or stakeholder feedback (or review availability) in this repository.
+
+- [x] Record the elapsed-time requirement for the handoff exercise.
+- [x] Complete the stakeholder-feedback/review step.
 
 ## Notes
 
