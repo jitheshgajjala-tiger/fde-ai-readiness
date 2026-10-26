@@ -12,7 +12,7 @@ Run the same document set through two different chunking strategies (e.g., 200 v
 
 ## Approach
 
-Run with `python experiments.py a2` in `rag_app/`. The same 7 docs and the same 8 questions were run through four chunking configs, measured with two retrievers (TF-IDF keyword and dense embeddings).
+Run with `python experiments.py a2` in `section_03_rag/`. The same 7 docs and the same 8 questions were run through four chunking configs, measured with two retrievers (TF-IDF keyword and dense embeddings).
 
 Metric: **hit@k**, meaning the exact fact needed to answer is inside one of the top-k chunks. I also recorded how many words the top-1 chunk contains, as a proxy for noise sent to an LLM.
 

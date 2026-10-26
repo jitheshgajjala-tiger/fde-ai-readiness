@@ -12,7 +12,7 @@ Combine keyword search with semantic (vector) search for one query where pure se
 
 ## Approach
 
-Run with `python experiments.py a5` in `rag_app/`.
+Run with `python experiments.py a5` in `section_03_rag/`.
 
 - **Corpus:** `docs/drd/dq_rules.md`, six data quality rules with near-identical wording and codes such as DQ-1047, DQ-1074, DQ-1407 and DQ-1470. This is a hard case for embeddings.
 - **Semantic retriever:** `BAAI/bge-small-en-v1.5` embeddings.

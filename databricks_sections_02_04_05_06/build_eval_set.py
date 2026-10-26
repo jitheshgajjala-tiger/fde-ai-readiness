@@ -1,4 +1,4 @@
-"""Builds agent_eval/eval_set.jsonl from the seed data so expected answers cannot drift from the tables."""
+"""Builds section_06_agent_eval/eval_set.jsonl from seed data so expected answers cannot drift from the tables."""
 
 import json
 import logging
@@ -13,7 +13,7 @@ from seed_data import CUSTOMERS, ORDERS, PRODUCTS  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
-OUTPUT = ROOT / "agent_eval" / "eval_set.jsonl"
+OUTPUT = ROOT / "section_06_agent_eval" / "eval_set.jsonl"
 NOTEBOOK_OUTPUT = ROOT / "notebooks" / "eval_data.py"
 NOT_FOUND = ["not found", "no order", "does not exist", "doesn't exist", "could not find", "couldn't find", "unable to find"]
 

@@ -12,7 +12,7 @@ Add a metadata field (e.g., document type or sector) to your chunks, and build a
 
 ## Approach
 
-Run with `python experiments.py a3` in `rag_app/`.
+Run with `python experiments.py a3` in `section_03_rag/`.
 
 - Each chunk carries a `doc_type` field taken from its folder: `sttm`, `drd` or `policy`.
 - `retrieve_dense(..., doc_type=...)` applies the filter **before** ranking, so chunks of other types can never appear in the results.

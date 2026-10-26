@@ -13,7 +13,7 @@ Deliberately ask a question the source documents do *not* answer, and confirm th
 
 ## Approach
 
-Run with `python experiments.py a4` in `rag_app/`.
+Run with `python experiments.py a4` in `section_03_rag/`.
 
 1. Asked 4 questions the documents do not answer, using the baseline pipeline (dense top-1, refuse only if score < 0.55).
 2. Added a **coverage gate** in `answer_from_hits`. It refuses when too few of the query's content words appear in the cited chunk.

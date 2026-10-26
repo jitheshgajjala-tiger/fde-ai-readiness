@@ -47,5 +47,5 @@ exit code 1
 
 ## Notes
 
-The screenshot shows the plain-language request and an STTM completeness response using the repository checks. This is evidence of observed auto-pickup behavior; the screenshot does not show an explicit skill-load event, so that mechanism is inferred from the response rather than directly displayed. The orders mapping was judged **not yet complete for handoff**: the response requested a target schema, full column mappings, calculation details, key-generation rules, load behavior, and broader reject criteria.
+I captured the plain-language request and STTM completeness response using the repository checks. This records the observed auto-pickup behavior; my screenshot does not show an explicit skill-load event, so I infer that mechanism from the response rather than claiming it was directly displayed. The orders mapping was judged **not yet complete for handoff**: the response requested a target schema, full column mappings, calculation details, key-generation rules, load behavior, and broader reject criteria.
 

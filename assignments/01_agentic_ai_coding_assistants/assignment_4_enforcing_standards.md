@@ -19,12 +19,12 @@ Write a custom instructions file (`*.instructions.md` or `CLAUDE.md`) that encod
 3. **Logging:** `logger = logging.getLogger(__name__)`; no `print()` in library code; row counts at the start and end of each pipeline step.
 
 In a fresh Copilot Chat, two new functions were created in new files rather than reusing the earlier examples:
-1. A feedback CSV cleaner, `clean_feedback_csv` in `topic1_demo/clean_feedback.py`.
-2. A monthly revenue aggregation, `build_monthly_revenue` in `topic1_demo/build_monthly_revenue.py`.
+1. A feedback CSV cleaner, `clean_feedback_csv` in `section_01_agentic_ai_coding_assistants/clean_feedback.py`.
+2. A monthly revenue aggregation, `build_monthly_revenue` in `section_01_agentic_ai_coding_assistants/build_monthly_revenue.py`.
 
 ## Evidence
 
-Fresh-chat screenshots show both new files being created. The first response reports checks for CSV/header validation, trimming values, dropping fully blank rows, and input/output row logging. The second reports monthly grouping, required-key and malformed-value validation, and input/output count logging.
+I captured the fresh-chat runs as both new files were created. The first response reports checks for CSV/header validation, trimming values, dropping fully blank rows, and input/output row logging. The second reports monthly grouping, required-key and malformed-value validation, and input/output count logging.
 
 | Convention | `clean_feedback.py` | `build_monthly_revenue.py` |
 |---|---|---|
@@ -33,7 +33,7 @@ Fresh-chat screenshots show both new files being created. The first response rep
 | Logging | Module logger; rows in and rows out | Module logger; rows in and months out |
 | No `print()` or bare `except` | Confirmed by code inspection | Confirmed; conversion catches only `TypeError` and `ValueError` |
 
-Both files have no Pylance editor diagnostics, and Pylance syntax checks reported no syntax errors. Copilot's screenshots additionally report focused behavior checks passing.
+Both files have no Pylance editor diagnostics, and Pylance syntax checks reported no syntax errors. The Copilot responses I captured also report focused behavior checks passing.
 
 ## Result and what I learned
 
@@ -44,5 +44,5 @@ Both files have no Pylance editor diagnostics, and Pylance syntax checks reporte
 
 ## Notes
 
-The two fresh-chat screenshots document the generated files and responses. Code inspection and editor/syntax diagnostics were independently checked in the workspace; the focused behavior-test claim is from the Copilot responses shown in the screenshots.
+I captured both fresh-chat runs as evidence of the generated files and responses. I independently checked the code and editor/syntax diagnostics in the workspace; the focused behavior-test claim comes from the Copilot responses I recorded.
 

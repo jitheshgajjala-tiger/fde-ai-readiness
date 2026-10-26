@@ -21,7 +21,7 @@ The loop, with the verify step required before finishing:
 | (a) Reproduce | Ran a script that retrieves and answers "what is the". Output: `top score: 0` and a returned chunk from `dq_rules.md`. Bug confirmed before editing anything. |
 | Diagnose | The stop words are removed, so the query vector is empty and every chunk scores 0. `answer_from_hits` kept chunks with `s >= min_score`, and its default `min_score` is 0.0, so zero-score chunks passed and the first one was cited. |
 | (b) Propose | Require `s > 0` in `answer_from_hits`. This is the smallest change and the answer layer is the right place to refuse. |
-| (c) Apply | One line changed in `rag_app/rag.py` (`s > 0 and s >= min_score and ...`). |
+| (c) Apply | One line changed in `section_03_rag/rag.py` (`s > 0 and s >= min_score and ...`). |
 | (d) Verify | Added regression test `test_stopword_only_query_is_refused`; `pytest` gave 10 passed; the editor error check on `rag.py` and `test_rag.py` reported no errors. |
 
 ## Evidence

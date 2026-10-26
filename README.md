@@ -6,14 +6,14 @@ Hands-on readiness exercises for moving from data engineering toward forward-dep
 
 - [`Data_Engineer_to_FDE_Readiness_Framework.md`](Data_Engineer_to_FDE_Readiness_Framework.md): concept guide and assignment index.
 - [`assignments/`](assignments/): scenario instructions and evidence write-ups for six topics.
-- [`rag_app/`](rag_app/): local RAG implementation and repeatable experiments for Topic 3.
-- [`databricks_prep/`](databricks_prep/): seed data, notebooks, app starter and runbook for Databricks-dependent topics.
-- [`topic1_demo/`](topic1_demo/): small Python examples for the coding-standards exercise.
+- [`section_01_agentic_ai_coding_assistants/`](section_01_agentic_ai_coding_assistants/): Python examples for Section 1 coding-standards exercises.
+- [`section_03_rag/`](section_03_rag/): local RAG implementation and repeatable experiments for Section 3.
+- [`databricks_sections_02_04_05_06/`](databricks_sections_02_04_05_06/): shared Databricks setup and notebooks for Sections 2, 4, 5, and 6. The numbered notebooks stay together because they use relative `%run` dependencies; app and agent-evaluation code have Section 5/6 subfolders.
 - [`.github/`](.github/): repository instructions, reusable prompt and STTM validation skill.
 
 ## Local RAG app
 
-From `rag_app/`, install dependencies, run tests, and try a question:
+From `section_03_rag/`, install dependencies, run tests, and try a question:
 
 ```powershell
 python -m pip install -r requirements.txt
@@ -21,11 +21,11 @@ python -m pytest -q
 python main.py "How is order_total calculated?"
 ```
 
-The first dense-retrieval run downloads the embedding model. See `rag_app/results.txt` for the recorded experiment output.
+The first dense-retrieval run downloads the embedding model. See `section_03_rag/results.txt` for the recorded experiment output.
 
 ## Databricks exercises
 
-See [`databricks_prep/README.md`](databricks_prep/README.md) for workspace setup, run order, cost hygiene and the status of the live exercises. Never commit credentials, tokens, or `.databrickscfg`.
+See [`databricks_sections_02_04_05_06/README.md`](databricks_sections_02_04_05_06/README.md) for workspace setup, run order, cost hygiene and the status of the live exercises. Never commit credentials, tokens, or `.databrickscfg`.
 
 ## Current progress
 

@@ -23,10 +23,10 @@ Initial compact result returned by the sub-agent: 8 files.
 
 | Value | Where |
 |---|---|
-| chunking 80/15 (code) | `rag_app/experiments.py` lines 61, 71, 101; `rag_app/main.py` lines 20 and 21 (CLI defaults) |
-| chunking 80/15 (prose) | `rag_app/experiments.py` lines 60 and 100 (headers), `rag_app/results.txt`, `assignment_1_baseline_pipeline.md`, `assignment_2_chunking_tradeoffs.md` |
-| min_score 0.55 (code) | `rag_app/experiments.py` lines 105, 111, 114 |
-| min_score 0.55 (prose) | `rag_app/results.txt`, `assignment_4_groundedness_failure_hunt.md` |
+| chunking 80/15 (code) | `section_03_rag/experiments.py` lines 61, 71, 101; `section_03_rag/main.py` lines 20 and 21 (CLI defaults) |
+| chunking 80/15 (prose) | `section_03_rag/experiments.py` lines 60 and 100 (headers), `section_03_rag/results.txt`, `assignment_1_baseline_pipeline.md`, `assignment_2_chunking_tradeoffs.md` |
+| min_score 0.55 (code) | `section_03_rag/experiments.py` lines 105, 111, 114 |
+| min_score 0.55 (prose) | `section_03_rag/results.txt`, `assignment_4_groundedness_failure_hunt.md` |
 
 I re-checked the code hits with a search in the main session; the line numbers matched.
 
@@ -35,7 +35,7 @@ I re-checked the code hits with a search in the main session; the line numbers m
 - The main conversation received about 25 lines instead of every file the sub-agent read, so the context stayed small.
 - The list showed something I would have missed: the values are hardcoded in **two places in code plus prose in 4 other files**. Changing the value in code alone would leave `results.txt` and both assignment write-ups stating the old configuration. That is a concrete argument for a single constant.
 - A sub-agent is stateless, so the prompt must say exactly what format to return. Without the format rule I would have received file dumps.
-- **Update applied without changing experiment settings:** centralized the baseline chunk size, overlap and score threshold as constants in `rag_app/rag.py`; the experiment and CLI code now reference those constants. The historical experiment outputs and their stated configurations were left unchanged.
+- **Update applied without changing experiment settings:** centralized the baseline chunk size, overlap and score threshold as constants in `section_03_rag/rag.py`; the experiment and CLI code now reference those constants. The historical experiment outputs and their stated configurations were left unchanged.
 - Re-ran the bounded search after the edit. `rag.py` now owns the definitions; `experiments.py` and `main.py` import and reference them. No duplicate executable baseline settings remain. `results.txt` and the assignment write-ups retain literal values as historical experiment evidence.
 
 ## Notes

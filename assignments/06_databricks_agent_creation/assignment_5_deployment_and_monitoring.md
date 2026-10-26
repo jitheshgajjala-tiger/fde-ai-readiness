@@ -6,7 +6,7 @@ Deploy the agent to a Model Serving endpoint, send it a few live requests, and s
 
 ## Approach
 
-Prepared a Model Serving path in `databricks_prep/notebooks/agent_service.py` and `databricks_prep/notebooks/09_deploy_agent.py`. The serving adapter retains all four Section 6 tools, uses Databricks Statement Execution rather than notebook-only `spark`, and declares the chat endpoint, SQL warehouse, UC functions, Genie space, and AI Search index as MLflow resources. Running the deployment notebook logs/registers the model in Unity Catalog and creates or updates a CPU, scale-to-zero endpoint; this has workspace and billing effects.
+Prepared a Model Serving path in `databricks_sections_02_04_05_06/notebooks/agent_service.py` and `databricks_sections_02_04_05_06/notebooks/09_deploy_agent.py`. The serving adapter retains all four Section 6 tools, uses Databricks Statement Execution rather than notebook-only `spark`, and declares the chat endpoint, SQL warehouse, UC functions, Genie space, and AI Search index as MLflow resources. Running the deployment notebook logs/registers the model in Unity Catalog and creates or updates a CPU, scale-to-zero endpoint; this has workspace and billing effects.
 
 The live deployment registered model version 3 and the endpoint reached `READY` on served model `fde_order_fulfilment_agent-4`. An initial update collided with provisioning already in progress; the notebook now waits for an active update to finish before applying endpoint configuration.
 

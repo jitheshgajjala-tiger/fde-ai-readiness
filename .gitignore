@@ -14,9 +14,9 @@ __pycache__/
 .databrickscfg
 
 # Databricks provisioning logs and temporary local checks
-databricks_prep/prov*.txt
-databricks_prep/pre.txt
-databricks_prep/gen.txt
+databricks_sections_02_04_05_06/prov*.txt
+databricks_sections_02_04_05_06/pre.txt
+databricks_sections_02_04_05_06/gen.txt
 
 # Editor and operating-system files
 .vscode/

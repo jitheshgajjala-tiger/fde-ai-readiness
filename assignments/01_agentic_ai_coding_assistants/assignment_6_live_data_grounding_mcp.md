@@ -53,7 +53,7 @@ I verified these columns and types from the live workspace using Databricks Stat
 
 - **Grounding changed the answer.** I had installed `fastembed` into the Python312 interpreter from the terminal and assumed that was what the editor used. The MCP server showed that the editor uses `.venv`, where `fastembed` is missing. Running the RAG experiments from the editor would fail with an `ImportError`, and the dense-retrieval test would be silently skipped. Guessing would have given the wrong answer.
 - The terminal also disagreed with the editor: plain `python` resolves to the Microsoft Store shortcut, so terminal probes were misleading too.
-- **Environment fix:** I should install into the selected interpreter with `.venv\Scripts\python.exe -m pip install -r rag_app\requirements.txt`.
+- **Environment fix:** I should install into the selected interpreter with `.venv\Scripts\python.exe -m pip install -r section_03_rag\requirements.txt`.
 - Pylance MCP supplied the verified interpreter/package facts, and the Databricks workspace query supplied the current table schema. Using the MCP question makes clear which live source should ground the schema answer.
 
 ## Notes

@@ -1,4 +1,4 @@
-# Databricks prep (Sections 2, 4, 5, 6)
+# Shared Databricks Code for Sections 2, 4, 5, and 6
 
 Workspace setup and a baseline AI Search query have been run. Verified resources include the three order tables, two
 Unity Catalog functions, the 24-row document-chunks table, the standard AI Search endpoint, and the Delta Sync index.
@@ -17,7 +17,7 @@ Product names changed in the docs: Genie Spaces are now **Genie Agents**, Vector
 | 2 | Run `02_seed_gold_tables`. | SQL warehouse or serverless |
 | 3 | **Section 2 (Genie):** follow `genie_space_setup.md`; then `03_genie_governance` and `04_genie_api`. | A second user for A3 |
 | 4 | **Section 4 (AI Search):** run `05_seed_doc_chunks`, then `06_ai_search` cell by cell. | Serverless, AI Search endpoint |
-| 5 | **Section 5 (Apps):** deploy `app/`, then add one feature at a time. | Apps enabled |
+| 5 | **Section 5 (Apps):** deploy `section_05_app/`, then add one feature at a time. | Apps enabled |
 | 6 | **Section 6 (Agents):** run `07_uc_functions`, then `08_agent`; run `09_deploy_agent` only when ready to register the model and create/update its billable endpoint. | Chat model endpoint; serving permissions for A5 |
 
 Do Section 2 before 5 and 6 (they reuse the Genie space), and Section 4 before 6 (the docs tool uses the index).
@@ -34,7 +34,7 @@ Write what **failed** too; the Topic 3 write-ups show the expected level of hone
 5. Review the five assignment files, then commit the markdown and evidence files to the repo or publish the repo branch/PR. Never include tokens, secrets, or private customer data in the exported notebook or screenshots.
 
 ## Section 5: Apps
-1. Compute, Apps, Create app (custom). Upload `app/` (or sync it from the CLI).
+1. Compute, Apps, Create app (custom). Upload `section_05_app/` (or sync it from the CLI).
 2. Add a **SQL warehouse** resource with the key `sql-warehouse`. Edit `ORDERS_TABLE` in `app.yaml` to your catalog.
 3. Grant the app's service principal `USE CATALOG`, `USE SCHEMA` and `SELECT` on `fact_orders` (Authorization tab shows its id).
 4. A1: deploy and click **Load orders**. No credentials appear in the code.
@@ -69,6 +69,6 @@ AI Search endpoints and Genie warehouses bill while they exist or run. The last 
 
 ## Files
 * `notebooks/`: Databricks source notebooks (`seed_data.py`, `seed_chunks.py` and `eval_data.py` are generated or shared data).
-* `app/`: Streamlit app, `app.yaml`, `requirements.txt`.
-* `agent_eval/eval_set.jsonl`: evaluation questions, built by `build_eval_set.py` from the seed data.
+* `section_05_app/`: Streamlit app, `app.yaml`, `requirements.txt`.
+* `section_06_agent_eval/eval_set.jsonl`: evaluation questions, built by `build_eval_set.py` from the seed data.
 * `make_chunk_seed.py`, `build_eval_set.py`, `tests/`: local helpers; run `python -m pytest -q` here.

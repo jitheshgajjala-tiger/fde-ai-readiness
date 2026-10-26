@@ -12,9 +12,9 @@ Build a RAG pipeline over a small internal document set (e.g., a handful of STTM
 
 ## Approach
 
-Code: `rag_app/rag.py`, run with `rag_app/experiments.py a1`. No Databricks needed; everything runs locally.
+Code: `section_03_rag/rag.py`, run with `section_03_rag/experiments.py a1`. No Databricks needed; everything runs locally.
 
-1. **Documents:** 7 short docs in `rag_app/docs/` in three folders (`sttm/`, `drd/`, `policy/`). The folder name becomes the `doc_type` metadata.
+1. **Documents:** 7 short docs in `section_03_rag/docs/` in three folders (`sttm/`, `drd/`, `policy/`). The folder name becomes the `doc_type` metadata.
 2. **Chunk:** `build_chunks` splits on words (80 words, overlap 15).
 3. **Embed:** local ONNX model `BAAI/bge-small-en-v1.5` (384 dimensions) via `fastembed`.
 4. **Index:** unit-normalised matrix held in memory.
@@ -23,7 +23,7 @@ Code: `rag_app/rag.py`, run with `rag_app/experiments.py a1`. No Databricks need
 
 ## Evidence
 
-Full output: `rag_app/results.txt` (section A1).
+Full output: `section_03_rag/results.txt` (section A1).
 
 | # | Question | Cited chunk | Score | Correct chunk? |
 |---|---|---|---|---|
