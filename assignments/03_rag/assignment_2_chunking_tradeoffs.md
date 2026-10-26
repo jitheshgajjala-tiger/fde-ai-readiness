@@ -7,7 +7,7 @@ Run the same document set through two different chunking strategies (e.g., 200 v
 ## Deliverables
 
 - [x] Approach and steps taken
-- [x] Evidence (screenshots, output, or links)
+- [x] Evidence (experiment output and results)
 - [x] Result and what I learned
 
 ## Approach

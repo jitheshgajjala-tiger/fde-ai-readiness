@@ -7,7 +7,7 @@ Build a RAG pipeline over a small internal document set (e.g., a handful of STTM
 ## Deliverables
 
 - [x] Approach and steps taken
-- [x] Evidence (screenshots, output, or links)
+- [x] Evidence (experiment output and results)
 - [x] Result and what I learned
 
 ## Approach

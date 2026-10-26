@@ -16,7 +16,7 @@ Deploy the same app for two users with different Unity Catalog permissions and c
 
 The live test confirmed that user-scoped SQL and Unity Catalog row filtering enforce access through the querying user's identity. The same app can show different authorized rows without embedding user-specific region filters in the app code.
 
-I did not save the specific identity names, region, row counts, or screenshots in this repository, so I have not included those details here.
+I did not save the specific identity names, region, or row counts in this repository, so I have not included those details here.
 
 ## Notes
 

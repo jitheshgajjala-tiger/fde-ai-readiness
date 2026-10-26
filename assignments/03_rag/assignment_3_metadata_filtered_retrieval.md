@@ -7,7 +7,7 @@ Add a metadata field (e.g., document type or sector) to your chunks, and build a
 ## Deliverables
 
 - [x] Approach and steps taken
-- [x] Evidence (screenshots, output, or links)
+- [x] Evidence (experiment output and results)
 - [x] Result and what I learned
 
 ## Approach

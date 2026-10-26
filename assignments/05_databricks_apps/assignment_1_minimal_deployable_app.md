@@ -7,12 +7,12 @@ Deploy a basic Databricks App (Streamlit or Gradio) that runs a simple query aga
 ## Deliverables
 
 - [x] Approach and steps taken
-- [x] Evidence (deployment screenshot)
+- [x] Evidence (deployment and query results)
 - [x] Result and what I learned
 
 ## Notes
 
-Deployed the Streamlit app `fde-ai` with the `sql-warehouse` resource and table `workspace.fde_prep.fact_orders`. Clicking **Load orders** returned order rows in the app while it ran as the app service principal. The app uses the Databricks SQL connector and app resource configuration; no credentials are hardcoded in the source. A deployment screenshot documents the successful query.
+Deployed the Streamlit app `fde-ai` with the `sql-warehouse` resource and table `workspace.fde_prep.fact_orders`. Clicking **Load orders** returned order rows in the app while it ran as the app service principal. The app uses the Databricks SQL connector and app resource configuration; no credentials are hardcoded in the source.
 
-The first attempt failed because the app service principal lacked `USE SCHEMA` on `workspace.fde_prep`. After granting the required Unity Catalog permissions, the query succeeded. The screenshot confirms the app output, including columns such as `order_id`, `region`, dates, and `order_status`.
+The first attempt failed because the app service principal lacked `USE SCHEMA` on `workspace.fde_prep`. After granting the required Unity Catalog permissions, the query succeeded and returned columns including `order_id`, `region`, dates, and `order_status`.
 

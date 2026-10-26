@@ -21,7 +21,7 @@ Test the same Genie Space with two different user identities that have different
 
 ## Evidence
 
-I verified both identities successfully and confirmed Genie returned results consistent with their respective row-level permissions. I did not save the exact identity names, returned counts, generated SQL, or screenshots in this repository, so I have not reproduced those details here.
+I verified both identities successfully and confirmed Genie returned results consistent with their respective row-level permissions. I did not save the exact identity names, returned counts, or generated SQL in this repository, so I have not reproduced those details here.
 
 ## Result and what I learned
 
@@ -29,5 +29,5 @@ My test confirmed that Unity Catalog row-level filtering governs what each ident
 
 ## Notes
 
-The row filter affects the shared table while attached; remove it after the controlled test. Detailed screenshots and row counts were not archived in this repository.
+The row filter affects the shared table while attached; remove it after the controlled test. Detailed identity and row-count records were not archived in this repository.
 

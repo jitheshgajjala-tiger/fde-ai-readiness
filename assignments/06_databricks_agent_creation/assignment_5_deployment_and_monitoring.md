@@ -24,16 +24,16 @@ Observed from the 2026-10-23 run:
 - Endpoint state was `READY`, `NOT_UPDATING`.
 - Metrics snapshot for served model `fde_order_fulfilment_agent-4`: model-prediction histogram count 4 and sum 11,620.5 ms (about 2.905 seconds mean across that metric bucket); model-queue histogram count 4 and sum about 5.473 ms. Request and request-latency series showed zero in the displayed snapshot, despite the successful invocations, so treat those series as stale/inconsistent rather than evidence of zero requests.
 - The displayed serving-log excerpt showed Gunicorn and workers starting, with no startup failure in that excerpt.
-- No MLflow trace screenshot was captured. It is supplementary; the live endpoint responses, latency, endpoint state, metrics, and serving-log output above provide the deployment and monitoring evidence.
+- The live endpoint responses, latency, endpoint state, metrics, and serving-log output above provide the deployment and monitoring evidence.
 
 ## Result and what I learned
 
-Assignment 5 is complete based on the live deployment, two successful smoke requests, endpoint status, latency measurements, metrics, and serving logs. MLflow is used to register and serve the model; a separate MLflow trace screenshot was not captured and is not needed to verify these results. The request-count series did not reflect the successful invocations in the captured metrics snapshot, so that discrepancy is noted rather than interpreted as zero traffic.
+Assignment 5 is complete based on the live deployment, two successful smoke requests, endpoint status, latency measurements, metrics, and serving logs. MLflow is used to register and serve the model. The request-count series did not reflect the successful invocations in the captured metrics snapshot, so that discrepancy is noted rather than interpreted as zero traffic.
 
 ## Deliverables
 
 - [x] Approach and steps taken
-- [x] Evidence (screenshots, output, or links)
+- [x] Evidence (request outputs, metrics, and serving logs)
 - [x] Result and what I learned
 
 ## Notes

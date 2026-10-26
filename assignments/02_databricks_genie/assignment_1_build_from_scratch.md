@@ -30,7 +30,7 @@ Tested natural-language questions through the Genie API and inspected its genera
 
 - Genie interpreted the seeded table and column metadata well enough to generate SQL for counts, a date-based delivery metric, and revenue requiring a product join.
 - The on-time answer used rows with both delivery and promised dates and returned 70.5882%, consistent with the expected 70.6% rounded.
-- The test confirms query behavior for these prompts; it does not independently inspect every description or every instruction in the space. Capture the space configuration screenshot if the reviewer requires proof of metadata and instruction setup.
+- The test confirms query behavior for these prompts; it does not independently inspect every description or every instruction in the space. The recorded API results demonstrate query behavior, not every metadata or instruction setting.
 
 ## Notes
 

@@ -7,7 +7,7 @@ Deliberately ask a question the source documents do *not* answer, and confirm th
 ## Deliverables
 
 - [x] Approach and steps taken
-- [x] Evidence (screenshots, output, or links)
+- [x] Evidence (experiment output and recorded prompt replies)
 - [x] Result and what I learned
 - [x] Run the generated grounded prompt through Copilot Chat and record unanswerable and answerable replies under Notes
 

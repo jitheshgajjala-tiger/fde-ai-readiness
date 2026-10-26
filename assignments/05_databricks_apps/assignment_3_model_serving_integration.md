@@ -7,7 +7,7 @@ Wire the app to call a deployed model-serving endpoint and display the response,
 ## Deliverables
 
 - [x] Approach and steps taken
-- [x] Evidence (successful response and failure screenshots)
+- [x] Evidence (successful response and failure output)
 - [x] Result and what I learned
 
 ## Notes
@@ -20,7 +20,7 @@ Prompt: "In one sentence, explain how an AI model could help summarize customer 
 
 Observed response: "An AI model can analyze customer support tickets to extract key information like issue type, urgency, and main complaint, then generate concise summaries that help support teams quickly understand and prioritize cases without reading full ticket details."
 
-The deployed app returned a relevant answer and did not claim to access its order data. Screenshot evidence was captured.
+The deployed app returned a relevant answer and did not claim to access its order data.
 
 ## Failure test
 

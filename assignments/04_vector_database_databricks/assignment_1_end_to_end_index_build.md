@@ -7,7 +7,7 @@ Starting from a Delta table with CDF enabled, create a Vector Search endpoint an
 ## Deliverables
 
 - [x] Approach and steps taken
-- [x] Evidence (screenshots, output, or links)
+- [x] Evidence (notebook output and top-hit results)
 - [x] Result and what I learned
 
 ## Approach

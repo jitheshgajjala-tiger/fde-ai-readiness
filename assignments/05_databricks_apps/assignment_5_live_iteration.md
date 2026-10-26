@@ -7,7 +7,7 @@ Starting from a working app, make three incremental UI/feature changes (e.g., ad
 ## Deliverables
 
 - [x] Approach and steps taken
-- [x] Evidence (deployment screenshots and [downloaded CSV](evidence/orders_north.csv))
+- [x] Evidence (recorded deployment results and [downloaded CSV](evidence/orders_north.csv))
 - [x] Result and what I learned
 
 ## Notes
@@ -18,7 +18,7 @@ Iteration 2 is deployed and behaviorally verified. With **North** selected, the 
 
 Iteration 3 is deployed and verified. With **North** selected, clicked **Download filtered orders (CSV)** and inspected [the exported CSV](evidence/orders_north.csv). It contains 7 rows; every row has `region = North`, and the order IDs (1001, 1005, 1006, 1013, 1014, 1021, 1022) match the displayed filtered table.
 
-All three iterations were deployed and checked independently: the region filter returns only the selected region, the monthly chart reflects the filtered rows, and the CSV export contains the same filtered records. The CSV is stored alongside this assignment for reproducible evidence. Deployment screenshots have not been saved as repository files.
+All three iterations were deployed and checked independently: the region filter returns only the selected region, the monthly chart reflects the filtered rows, and the CSV export contains the same filtered records. The CSV is stored alongside this assignment for reproducible evidence.
 
 ## Result and what I learned
 

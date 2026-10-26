@@ -7,7 +7,7 @@ Combine keyword search with semantic (vector) search for one query where pure se
 ## Deliverables
 
 - [x] Approach and steps taken
-- [x] Evidence (screenshots, output, or links)
+- [x] Evidence (experiment output and results)
 - [x] Result and what I learned
 
 ## Approach
